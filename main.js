@@ -34,7 +34,7 @@ class Blockchain{
     }
 
     isChainValid(){
-        for(let i=1; this.chain.length; i++){
+        for(let i=1;i<this.chain.length; i++){
             const currBlock = this.chain[i];
             const prevBlock = this.chain[i-1];
 
@@ -53,5 +53,12 @@ class Blockchain{
 let ashwinCoin = new Blockchain();
 ashwinCoin.addBlock(new Block(1,'10/02/2002',{amount:4}));
 ashwinCoin.addBlock(new Block(2,'10/18/2002',{amount:6}));
+
+console.log('Is Blockchain Valid : ' + ashwinCoin.isChainValid()); // returns true
+
+ashwinCoin.chain[1].data = {amount : 100};
+ashwinCoin.chain[1].hash = ashwinCoin.chain[1].calculateHash();
+
+console.log('Is Blockchain Valid : ' + ashwinCoin.isChainValid()); // return false
 
 console.log(JSON.stringify(ashwinCoin, null, 4));
